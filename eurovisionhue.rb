@@ -48,13 +48,15 @@ def colour_to_hue(colour)
   }
 end
 
+last_entry = nil
 current_country = nil
 
 while true do
   doc = Nokogiri::HTML(open(url))
   new_country = doc.xpath('//*[@data-filter-tag]').first.attr('data-filter-tag')
+  puts "Detected change to #{new_country} on the live blog" if (new_country != current_country && new_country != last_entry)
+  last_entry = new_country
   if new_country != current_country
-    puts "Detected change to #{new_country} on the live blog"
     flag_file = "flags/#{new_country.gsub(' ', '_')}.png"
     if File.exist? flag_file
       puts "#{new_country} appears to actually be a country, so making a transition"
