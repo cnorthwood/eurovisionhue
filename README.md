@@ -6,7 +6,7 @@ most recently mentioned in that live blog.
 
 Will probably work on most Macs.
 
-Install dependencies: `bundle`
+Install dependencies with [Bundler](https://bundler.io)
 
     bundle
     
