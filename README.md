@@ -6,12 +6,12 @@ most recently mentioned in that live blog.
 
 Will probably work on most Macs.
 
-Install dependencies: `bundle`
+Install dependencies with [Bundler](https://bundler.io)
 
     bundle
     
 Now you need to register your Mac with you Hue. Press the button on the bridge, then:
 
-    ruby eurovisionhue.rb
+    bundle exec ruby eurovisionhue.rb
 
 You only need to do that the first time you run it.
