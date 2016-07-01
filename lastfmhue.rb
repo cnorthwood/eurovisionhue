@@ -54,7 +54,7 @@ while true do
   doc = Nokogiri::XML(open(url))
   new_album_art = doc.xpath("//image[@size='large']").first.text
   if new_album_art != current_album_art
-    unless new_album_art.nil?
+    unless new_album_art.empty?
       current_album_art = new_album_art
       puts "Transitioning lights to art for #{doc.xpath("//track/name").first.text} [#{new_album_art}]"
       begin
@@ -73,7 +73,6 @@ while true do
         file.close
         file.unlink
       end
-
     end
   end
   sleep 18
