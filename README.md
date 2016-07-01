@@ -23,4 +23,4 @@ Last.FM mode
 This also supports polling Last.fm and using your most recent track's album
 art as the colours to use. You need to have a last.fm API key:
 
-    LASTFM_API_KEY=password bundle exec ruby lastfmhue.rb
+    LASTFM_USER=lastfm-user LASTFM_API_KEY=012344556 bundle exec ruby lastfmhue.rb

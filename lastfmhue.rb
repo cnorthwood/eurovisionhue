@@ -4,7 +4,10 @@ require 'miro'
 require 'nokogiri'
 require 'open-uri'
 
-url = "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=laser-kun&limit=1&api_key=#{ENV['LASTFM_API_KEY']}"
+lastfm_user = ENV['LASTFM_USER']
+lastfm_user = 'laser-kun' if lastfm_user.nil?
+
+url = "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=#{lastfm_user}&limit=1&api_key=#{ENV['LASTFM_API_KEY']}"
 
 hue = Hue::Client.new
 
