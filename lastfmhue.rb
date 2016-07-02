@@ -59,7 +59,7 @@ while true do
   if new_album_art != current_album_art
     unless new_album_art.empty?
       current_album_art = new_album_art
-      puts "Transitioning lights to art for #{doc.xpath("//track/name").first.text} [#{new_album_art}]"
+      puts "Detected track change to #{doc.xpath("//track/name").first.text} [#{new_album_art}]"
       begin
         file = Tempfile.new 'lastfmhue'
         file.write open(new_album_art).read
