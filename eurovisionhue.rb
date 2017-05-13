@@ -52,7 +52,14 @@ current_country = nil
 
 while true do
   doc = Nokogiri::HTML(open(url))
-  countries = doc.css('.live-post__title').reverse.map { | title_elem | title_elem.text }
+  countries = doc.css('.live-post__title').map do | title_elem |
+    m = /\d+\. (.+)/.match(title_elem.text)
+    if m
+      m[1]
+    else
+      title_elem.text
+    end
+  end
   countries.select! { | title | File.exist? "flags/#{title}.png" }
   new_country = countries.first
   puts "Detected change to #{new_country} on the live blog" if (new_country != current_country)
