@@ -4,7 +4,7 @@ require 'miro'
 require 'nokogiri'
 require 'open-uri'
 
-url = 'http://www.telegraph.co.uk/tv/2017/05/09/eurovision-semi-final-one-live-results-running-order/'
+url = 'http://www.telegraph.co.uk/tv/2017/05/13/eurovision-final-2017-live-performers-winners-results/'
 
 hue = Hue::Client.new
 
