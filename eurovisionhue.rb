@@ -71,7 +71,7 @@ while true do
       if i < colours.to_rgb.count
         rgb = colours.to_rgb[i]
       else
-        rgb = colours.to_rgb[i-colours.to_rgb.count]
+        rgb = colours.to_rgb[i % colours.to_rgb.count]
       end
       target_colour = Color::RGB.new(rgb[0], rgb[1], rgb[2])
       puts "Transitioning #{light.name} to #{rgb}"
