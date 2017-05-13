@@ -4,12 +4,17 @@ Eurovision Hue controller
 Scrapes the live blog, updates your Hue light colours according to the country
 most recently mentioned in that live blog.
 
-Will probably work on most Macs.
+Requires a modern Ruby. Install RVM: https://rvm.io/rvm/install and then
+`rvm use 2.3.1` or something.
 
 Install dependencies with [Bundler](https://bundler.io)
 
     bundle
-    
+
+If you have issues installing Nokogiri at this point, follow the instructions
+at http://www.nokogiri.org/tutorials/installing_nokogiri.html#mac_os_x
+and try again.
+
 Now you need to register your Mac with you Hue. Press the button on the
 bridge, then:
 
