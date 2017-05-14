@@ -15,6 +15,8 @@ If you have issues installing Nokogiri at this point, follow the instructions
 at http://www.nokogiri.org/tutorials/installing_nokogiri.html#mac_os_x
 and try again.
 
+You will also need to install ImageMagick: https://www.imagemagick.org/script/binary-releases.php.
+
 Now you need to register your Mac with you Hue. Press the button on the
 bridge, then:
 
