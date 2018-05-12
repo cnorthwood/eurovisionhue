@@ -5,7 +5,7 @@ require 'json'
 require 'open-uri'
 
 # TODO: this is the semi-final blog post
-url = 'https://eurovision-api.liveblog.pro/api/client_blogs/5af4482902f34f0154ae16d4/posts'
+url = 'https://eurovision-api.liveblog.pro/api/client_blogs/5af6ceef02f34f2e953dfcb9/posts'
 
 hue = Hue::Client.new
 
