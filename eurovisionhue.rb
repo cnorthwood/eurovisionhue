@@ -1,10 +1,11 @@
 require 'color'
 require 'hue'
 require 'miro'
-require 'nokogiri'
+require 'json'
 require 'open-uri'
 
-url = 'http://www.telegraph.co.uk/tv/2017/05/13/eurovision-final-2017-live-performers-winners-results/'
+# TODO: this is the semi-final blog post
+url = 'https://eurovision-api.liveblog.pro/api/client_blogs/5af4482902f34f0154ae16d4/posts'
 
 hue = Hue::Client.new
 
@@ -48,20 +49,19 @@ def colour_to_hue(colour)
   }
 end
 
+def find_country(text)
+  country_names = Dir.entries('flags')
+                     .map { | filename | filename.split('.')[0] }
+                     .reject(&:nil?)
+  mentioned_countries = country_names.select { | country_name | text.downcase.include? country_name.downcase }
+  mentioned_countries.first
+end
+
 current_country = nil
 
 while true do
-  doc = Nokogiri::HTML(open(url))
-  countries = doc.css('.live-post__title').map do | title_elem |
-    m = /\d+\. (.+)/.match(title_elem.text)
-    if m
-      m[1]
-    else
-      title_elem.text
-    end
-  end
-  countries.select! { | title | File.exist? "flags/#{title}.png" }
-  new_country = countries.first
+  doc = JSON.parse(open(url).read)
+  new_country = doc['_items'].reverse.map { |item| find_country(item['groups'][1]['refs'][0]['item']['text']) }.reject(&:nil?).last
   puts "Detected change to #{new_country} on the live blog" if (new_country != current_country)
   if new_country != current_country
     current_country = new_country
