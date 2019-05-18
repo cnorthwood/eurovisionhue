@@ -1,11 +1,12 @@
 require 'color'
 require 'hue'
-require 'miro'
 require 'json'
+require 'miro'
+require 'nokogiri'
 require 'open-uri'
 
 # TODO: this is the semi-final blog post
-url = 'https://eurovision-api.liveblog.pro/api/client_blogs/5af6ceef02f34f2e953dfcb9/posts'
+url = 'https://oneurope.co.uk/live-blog/live-blog-eurovision-2019-second-semi-final/'
 
 hue = Hue::Client.new
 
@@ -18,11 +19,11 @@ def colour_to_hue(colour)
   delta = max - min
   v = max * 100
 
-  if max != 0.0
-    s = delta / max * 100
-  else
-    s = 0.0
-  end
+  s = if max != 0.0
+        delta / max * 100
+      else
+        0.0
+      end
 
   if s == 0.0
     h = 0.0
@@ -37,9 +38,7 @@ def colour_to_hue(colour)
 
     h *= 60.0
 
-    if h < 0
-      h += 360.0
-    end
+    h += 360.0 if h < 0
   end
 
   {
@@ -51,18 +50,18 @@ end
 
 def find_country(text)
   country_names = Dir.entries('flags')
-                     .map { | filename | filename.split('.')[0] }
+                     .map { |filename| filename.split('.')[0] }
                      .reject(&:nil?)
-  mentioned_countries = country_names.select { | country_name | text.downcase.include? country_name.downcase }
+  mentioned_countries = country_names.select { |country_name| text.downcase.include? country_name.downcase }
   mentioned_countries.first
 end
 
 current_country = nil
 
-while true do
-  doc = JSON.parse(open(url).read)
-  new_country = doc['_items'].reverse.map { |item| find_country(item['groups'][1]['refs'][0]['item']['text']) }.reject(&:nil?).last
-  puts "Detected change to #{new_country} on the live blog" if (new_country != current_country)
+loop do
+  doc = Nokogiri::HTML(open(url, read_timeout: 10))
+  new_country = doc.css('.livedojo_title').map { |elem| find_country(elem.text) }.reject(&:nil?).first
+  puts "Detected change to #{new_country} on the live blog" if new_country != current_country
   if new_country != current_country
     current_country = new_country
     colours = Miro::DominantColors.new("flags/#{new_country}.png")
