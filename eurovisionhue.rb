@@ -5,7 +5,7 @@ require 'miro'
 require 'nokogiri'
 require 'open-uri'
 
-url = 'https://oneurope.co.uk/eurovision/live-blog-eurovision-2019/'
+url = 'https://www.radiotimes.com/news/tv/2019-05-18/eurovision-song-contest-2019-live-blog/'
 
 hue = Hue::Client.new
 
@@ -48,18 +48,19 @@ def colour_to_hue(colour)
 end
 
 def find_country(text)
+  text.downcase!
   country_names = Dir.entries('flags')
                      .map { |filename| filename.split('.')[0] }
                      .reject(&:nil?)
-  mentioned_countries = country_names.select { |country_name| text.downcase.include? country_name.downcase }
-  mentioned_countries.first
+  mentioned_countries = country_names.select { |country_name| text.include? country_name.downcase }
+  mentioned_countries.min_by { |country_name| text.index(country_name.downcase) }
 end
 
 current_country = nil
 
 loop do
-  doc = Nokogiri::HTML(open(url, read_timeout: 10))
-  new_country = doc.css('.livedojo_title').map { |elem| find_country(elem.text) }.reject(&:nil?).first
+  new_country = find_country Nokogiri::HTML(open(url, read_timeout: 10))
+                                 .css('.template-article__main-content').first.text
   puts "Detected change to #{new_country} on the live blog" if new_country != current_country
   if new_country != current_country
     current_country = new_country
