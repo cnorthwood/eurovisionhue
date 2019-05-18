@@ -1,5 +1,4 @@
-Eurovision Hue controller
-=========================
+# Eurovision Hue controller
 
 Scrapes the live blog, updates your Hue light colours according to the country
 most recently mentioned in that live blog.
@@ -24,8 +23,17 @@ bridge, then:
 
 You only need to do that the first time you run it.
 
-Last.FM mode
-------------
+Optionally, use Docker:-
+
+```bash
+docker build -t eurovision .
+```
+
+```bash
+docker run -it eurovision
+```
+
+## Last.FM mode
 
 This also supports polling Last.fm and using your most recent track's album
 art as the colours to use. You need to have a last.fm API key:
