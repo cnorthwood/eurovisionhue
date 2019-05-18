@@ -5,8 +5,7 @@ require 'miro'
 require 'nokogiri'
 require 'open-uri'
 
-# TODO: this is the semi-final blog post
-url = 'https://oneurope.co.uk/live-blog/live-blog-eurovision-2019-second-semi-final/'
+url = 'https://oneurope.co.uk/eurovision/live-blog-eurovision-2019/'
 
 hue = Hue::Client.new
 
