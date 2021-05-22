@@ -52,7 +52,14 @@ end
 current_country = nil
 
 loop do
-  new_country = find_country Nokogiri::HTML(URI.open(url, read_timeout: 10)).css('h2').first.text
+  new_country = nil
+  Nokogiri::HTML(URI.open(url, read_timeout: 10)).css('h2').each do |elem|
+    detected_country = find_country elem.text
+    unless detected_country.nil?
+      new_country = detected_country
+      break
+    end
+  end
   puts "Detected change to #{new_country} on the live blog" if new_country != current_country
   if new_country != current_country and !new_country.nil?
     current_country = new_country
