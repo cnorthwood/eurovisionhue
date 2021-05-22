@@ -54,7 +54,7 @@ current_country = nil
 loop do
   new_country = find_country Nokogiri::HTML(URI.open(url, read_timeout: 10)).css('h2').first.text
   puts "Detected change to #{new_country} on the live blog" if new_country != current_country
-  if new_country != current_country
+  if new_country != current_country and !new_country.nil?
     current_country = new_country
     colours = Miro::DominantColors.new("flags/#{new_country.sub(" ", "_")}.png")
                                   .to_rgb
