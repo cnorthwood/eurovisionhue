@@ -29,6 +29,24 @@ Now start the script:
 
     bundle exec ruby eurovisionhue.rb
 
+## Docker
+
+This can be built/run using docker and the included Dockerfile.
+
+Build with:
+
+    docker build -t eurovisionhue .
+
+Run initial config:
+
+    echo "{}" > ~/.lightsconfig
+    docker run --rm -it -v ~/.lightsconfig:/app/.lightsconfig eurovisionhue bundle exec lights discover -s
+    docker run --rm -it -v ~/.lightsconfig:/app/.lightsconfig eurovisionhue bundle exec lights register
+
+Run with:
+
+    docker run --rm -it -v ~/.lightsconfig:/app/.lightsconfig eurovisionhue
+
 ## Last.FM mode
 
 *deprecated, this needs rework*
