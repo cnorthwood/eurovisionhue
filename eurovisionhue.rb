@@ -4,7 +4,7 @@ require 'miro'
 require 'nokogiri'
 require 'open-uri'
 
-url = 'https://eurovision.tv/live-blog-grand-final-2021'
+url = 'https://eurovision.tv/live-blog-eurovision-song-contest-2022-grand-final'
 
 LIGHTS_CONFIG_PATH = "#{ENV["HOME"]}/.lightsconfig"
 unless File.exists? LIGHTS_CONFIG_PATH
