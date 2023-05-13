@@ -4,7 +4,7 @@ require 'miro'
 require 'nokogiri'
 require 'open-uri'
 
-url = 'https://eurovision.tv/live-blog-eurovision-song-contest-2022-grand-final'
+url = 'https://eurovision.tv/live-blog-grand-final-2023'
 
 LIGHTS_CONFIG_PATH = "#{ENV["HOME"]}/.lightsconfig"
 unless File.exists? LIGHTS_CONFIG_PATH
@@ -76,5 +76,5 @@ loop do
       hue.set_bulb_state(bulb_id, target_state)
     end
   end
-  sleep 26
+  sleep 19
 end
