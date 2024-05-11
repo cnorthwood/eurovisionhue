@@ -42,7 +42,7 @@ class EurovisionHue
       target_state.transition_time = 5
       target_state.xy = rgb_to_xy(*rgb)
       puts "Transitioning #{bulb_id} to #{rgb}"
-      @hue.set_bulb_state(bulb_id, target_state)
+      hue.set_bulb_state(bulb_id, target_state)
     end
   end
 

@@ -3,8 +3,8 @@
 Scrapes the live blog, updates your Hue light colours according to the country
 most recently mentioned in that live blog.
 
-Requires a modern Ruby. Install RVM: https://rvm.io/rvm/install and then
-`rvm use 3.0.1` or something.
+This now has a .ruby-version file, so if you've [got RVM installed](https://rvm.io/rvm/install
+it'll automatically pick a Ruby that this is tested with.
 
 Install dependencies with [Bundler](https://bundler.io)
 
