@@ -1,7 +1,8 @@
 require 'lights'
 require 'json'
 require 'miro'
-require 'faraday'
+require 'nokogiri'
+require 'open-uri'
 
 class EurovisionHue
   def initialize
@@ -78,8 +79,8 @@ class EurovisionHue
   end
 
   def get_liveblog_text
-    url = 'https://data.24liveplus.com/v1/retrieve_server/x/event/3577972495301732666/news/?inverted_order=1'
-    http_get(url).body["data"]["news"].map { |entry| entry["contents"] }
+    url = 'https://news.sky.com/story/eurovision-2024-latest-updates-chaos-as-dutch-singer-axed-and-irish-star-demands-urgent-attention-over-separate-serious-incident-13131792'
+    Nokogiri::HTML(URI.open(url, read_timeout: 10)).css('.ncpost-container').map { |elem| elem.content }
   end
 
   def hue
