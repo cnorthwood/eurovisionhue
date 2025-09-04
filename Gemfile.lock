@@ -8,13 +8,13 @@ GEM
     color (1.8)
     lights (1.0.2)
       simpletable (~> 0.3.2)
-    mini_portile2 (2.8.8)
+    mini_portile2 (2.8.9)
     miro (0.4.0)
       chunky_png
       cocaine
       color
       oily_png
-    nokogiri (1.18.8)
+    nokogiri (1.18.9)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     oily_png (1.2.1)
@@ -31,7 +31,7 @@ DEPENDENCIES
   chunky_png (< 1.4.0)
   lights
   miro
-  nokogiri
+  nokogiri (>= 1.18.9)
 
 BUNDLED WITH
    2.2.15
